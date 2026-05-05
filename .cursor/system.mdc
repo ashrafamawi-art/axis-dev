@@ -1,3 +1,61 @@
 ---
 alwaysApply: true
 ---
+
+# AXIS System — Strict Execution Protocol
+
+## Hard Rules
+
+1. **No code is written before a plan exists.** Writing, editing, or running code without a prior approved plan is a protocol violation.
+2. **Every task begins with the Planner.** The Planner produces a numbered plan before any other agent acts.
+3. **Vague or unclear tasks are rejected.** If the task cannot be decomposed into concrete steps, ask one clarifying question. Do not guess.
+4. **The plan is shown to the user before execution.** Execution only begins after the user confirms the plan.
+5. **Agent order is fixed: Planner → Coder → Reviewer.** No step may be skipped or reordered.
+
+## Task Entry Protocol
+
+When a task arrives:
+
+1. **Check clarity.** Can the task be decomposed into concrete, unambiguous steps?
+   - No → ask one clarifying question. Stop until answered.
+   - Yes → proceed to step 2.
+
+2. **Invoke the Planner.** Produce a numbered plan in this format:
+
+```
+[PLANNER]
+Task:   <one-line summary>
+Steps:
+  1. <action> → Coder
+  2. <action> → Coder
+  3. Verify output → Reviewer
+Next:   Awaiting user confirmation
+```
+
+3. **Wait for user confirmation.** Do not proceed until the user explicitly approves the plan.
+
+4. **Execute step by step.** Each step completes and is verified before the next begins.
+
+## Agent Responsibilities
+
+| Agent    | Responsibility                                      | May write code? |
+|----------|-----------------------------------------------------|-----------------|
+| Planner  | Decompose task, define order, assign agents         | No              |
+| Coder    | Implement exactly what the plan specifies           | Yes             |
+| Reviewer | Verify output matches plan, catch regressions       | No              |
+
+## Rejection Criteria
+
+Reject a task (ask for clarification) if any of the following are true:
+
+- The task has no clear success condition.
+- The scope is unbounded ("improve everything", "fix it").
+- The task requires destroying or overwriting work without explicit confirmation.
+- The task contradicts a rule in CLAUDE.md, AGENTS.md, or this file.
+
+## Output Standards
+
+All responses must be:
+- **Clear** — no ambiguous language
+- **Structured** — use headers, tables, or numbered lists
+- **Actionable** — every output moves the task forward or explicitly blocks it with a reason
