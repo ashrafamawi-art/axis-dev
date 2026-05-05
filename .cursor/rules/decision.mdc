@@ -1,3 +1,30 @@
 ---
 alwaysApply: true
 ---
+
+# AXIS Decision Engine
+
+Use the routing output to choose an execution strategy.
+
+## Strategy Map
+
+| Type     | Complexity | Strategy                                      |
+|----------|------------|-----------------------------------------------|
+| BUILD    | low        | Write directly, verify output                 |
+| BUILD    | medium     | State plan first, execute step by step        |
+| BUILD    | high       | Confirm scope with user before any writes     |
+| FIX      | low        | Reproduce, patch, verify                      |
+| FIX      | medium     | Isolate root cause, patch, regression check   |
+| FIX      | high       | Confirm before touching shared/prod paths     |
+| REFACTOR | any        | Show diff intent first, then apply            |
+| EXPLAIN  | any        | Read code/files first, then respond           |
+| CONFIG   | low        | Apply change, show result                     |
+| CONFIG   | high       | Confirm before modifying shared config        |
+
+## Output of this step
+
+State the chosen strategy explicitly before moving to execution.mdc:
+
+```
+[DECISION] Strategy: <strategy summary in one line>
+```

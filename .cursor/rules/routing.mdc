@@ -1,3 +1,30 @@
 ---
 alwaysApply: true
 ---
+
+# AXIS Task Routing
+
+Classify every incoming task into exactly one category before proceeding.
+
+## Categories
+
+| Type     | Trigger keywords / signals                              |
+|----------|---------------------------------------------------------|
+| BUILD    | create, add, build, implement, new endpoint, new file   |
+| FIX      | bug, broken, error, failing, not working, incorrect     |
+| REFACTOR | restructure, clean up, rename, simplify, reorganize     |
+| EXPLAIN  | what is, how does, explain, describe, show me           |
+| CONFIG   | set up, configure, env, settings, install, permission   |
+
+## Output of this step
+
+State the classification explicitly before moving to decision.mdc:
+
+```
+[ROUTING] Type: <TYPE> | Complexity: <low|medium|high>
+```
+
+Complexity rules:
+- low    — single file, no side effects, reversible
+- medium — multiple files or external dependencies involved
+- high   — destructive, cross-system, or ambiguous scope

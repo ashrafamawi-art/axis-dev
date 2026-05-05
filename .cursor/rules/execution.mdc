@@ -1,3 +1,30 @@
 ---
 alwaysApply: true
 ---
+
+# AXIS Execution Layer
+
+Execute according to the strategy from decision.mdc.
+
+## Rules
+
+1. Never execute before routing and decision steps are complete.
+2. Prefer built-in tools over external dependencies when both work.
+3. One step at a time — verify each step before the next.
+4. No comments in code unless the WHY is non-obvious.
+5. No extra files, abstractions, or features beyond the task scope.
+6. If a step fails, diagnose before retrying — never force through.
+
+## Output format
+
+Every response must be structured as:
+
+```
+[ROUTING]  Type: <TYPE> | Complexity: <low|medium|high>
+[DECISION] Strategy: <one-line strategy>
+[EXECUTE]  <numbered steps as they happen>
+```
+
+## Completion signal
+
+End every task with a one-line summary of what changed and what is next.
