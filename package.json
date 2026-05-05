@@ -1,0 +1,25 @@
+{
+  "name": "axis-dev-setup",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashrafamawi-art/axis-dev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/ashrafamawi-art/axis-dev/issues"
+  },
+  "homepage": "https://github.com/ashrafamawi-art/axis-dev#readme"
+}
